@@ -67,8 +67,8 @@ jobs:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           # EB
-          application_name: mytripApplication
-          environment_name: Mytripapplication-env
+          application_name: mytrip-deploy
+          environment_name: mytripdeploy-env
           version_label: earth-docker-${{steps.current-time.outputs.formattedTime}}
           region: ap-northeast-2
           deployment_package: deploy/deploy.zip
