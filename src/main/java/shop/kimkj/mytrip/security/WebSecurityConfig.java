@@ -80,7 +80,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(Arrays.asList("https://www.hyogin.shop", "http://localhost:63342"));
+        configuration.setAllowedOrigins(Arrays.asList("https://www.hyogin.shop", "http://www.hyogin.shop", "http://localhost:63342"));
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
         configuration.setAllowCredentials(true);
