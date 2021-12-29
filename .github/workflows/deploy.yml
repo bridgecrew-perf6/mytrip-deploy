@@ -1,8 +1,9 @@
+# git 연결(branches = git branch)
 name: Build and Push Docker Image
 on:
   push:
     branches:
-      - deploy
+      - main
 jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
@@ -10,10 +11,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Set up JDK 1.8
+      - name: Set up JDK 8
         uses: actions/setup-java@v1
         with:
-          java-version: 1.8
+          java-version: 8
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
@@ -37,6 +38,7 @@ jobs:
         id: build-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          # ecr name
           ECR_REPOSITORY: mytrip-app
           IMAGE_TAG: latest
         run: |
@@ -61,10 +63,12 @@ jobs:
       - name: Beanstalk Deploy
         uses: einaregilsson/beanstalk-deploy@v14
         with:
+          # AWS 발급받은 Key
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: ebmytrip
-          environment_name: ebmytrip-env
+          # EB
+          application_name: mytripApplication
+          environment_name: Mytripapplication-env
           version_label: earth-docker-${{steps.current-time.outputs.formattedTime}}
           region: ap-northeast-2
           deployment_package: deploy/deploy.zip
